@@ -10,7 +10,7 @@ if sys.version_info < (2, 7):
     install_requires.append("argparse == 1.2.1")
 
 setup(name='repyt',
-      version='0.1.0',
+      version='0.1.1',
       description='Automatically re-run Python applications when files change.',
       long_description=readme(),
       url='https://github.com/di/repyt',

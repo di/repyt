@@ -49,11 +49,26 @@ def get_shell():
     return os.environ.get('SHELL', pwd.getpwuid(os.getuid()).pw_shell)
 
 
+def get_files():
+    '''
+    Get the files to monitor.
+    '''
+    matches = []
+    for root, dirnames, filenames in os.walk('.'):
+        for filename in filenames:
+            matches.append(os.path.join(root, filename))
+    return matches
+
+
 def main():
     # Command-line entry point for setup.py install/develop
     command = get_command()
+    shell = get_shell()
+    files = get_files()
+
     run_with_reloader(
         lambda: subprocess.call(
             command,
             shell=True,
-            executable=get_shell()))
+            executable=shell),
+        extra_files=files)
